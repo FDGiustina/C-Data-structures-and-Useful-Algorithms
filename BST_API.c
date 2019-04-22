@@ -2,6 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 
+/*
+  Por enquanto a inserção, impressão, busca e sucessor funcionam. Falta implementar as rotações e a remoção de um nodo que
+  não esteja na folha.
+  A unica maneira que encontrei de implementar a árvore sem gerar problemas de ponteiro foi retornar um nodo nas funções.
+  Pode parecer estranho mas funciona.
+  TO DO:
+    - Implementar rotações a direita e a esquerda
+    - Implementar remoção de um nodo diferente da folha
+    - Implementar a AVL
+*/
+
 
 typedef struct node{
   int key;
