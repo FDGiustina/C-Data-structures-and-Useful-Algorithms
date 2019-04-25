@@ -16,27 +16,28 @@
 
 typedef struct node{
   int key;
-  struct node *right,*left,*parent;
+  int h;
+  struct node *right,*left,*p;
 }node;
 
-node* insertion(node *n, int x){
+node* insertion(node *n, int x){ //recebe nodo e chave
   if(n == NULL){
     n = malloc(sizeof(node));
+    n->p = NULL;
     n->right = NULL;
     n->left = NULL;
+    n->h = -1;
     n->key = x;
     return n;
   }
-  if(n->key >= x){
+  if(n->key >= x)
     n->left = insertion(n->left,x);
-  }
-  if(n->key < x){
+  else //  n->key < x)
     n->right = insertion(n->right,x);
-  }
   return n;
 }
 
-node* search(node *t,int x){
+node* search(node *t,int x){//retorna endereço de nodo
   node *aux = t;
   while(aux != NULL){
     if(aux->key == x){
@@ -52,10 +53,12 @@ node* search(node *t,int x){
   return NULL;
 }
 
-node* sucessor(node *t){
+node* sucessor(node *t){// retorna endereço de sucessor
   node* aux;
   aux = t->right;
-  while(aux->left->left != NULL){
+  if(aux==NULL)
+     return NULL;
+  while(aux->left != NULL){
     aux = aux->left;
   }
   return aux;
@@ -72,12 +75,12 @@ void remove_node(node *t,int x){
   }
 }
 
-void printtree(node *n){
+void printtree(node *n){ // imprime arvore
   if(n == NULL){
     return;
   }
   printtree(n->left);
-  printf("%d \n",n->key);
+  printf("%d %d\n",n->key,n->h);
   printtree(n->right);
 }
 
